@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nida Siddique — Physics Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12151A;
+    --bg-raised: #1B1F26;
+    --bg-raised-2: #20242C;
+    --ink: #EDEAE3;
+    --ink-dim: #A8ADB6;
+    --ink-faint: #6B7078;
+    --line: #2C313A;
+    --violet: #6C72E8;
+    --violet-dim: #4A4F9E;
+    --gold: #D8A646;
+    --rust: #BD5B36;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--violet-dim); color:#fff;}
+
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(18,21,26,0.78);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .logo{font-family:var(--mono); font-size:13px; letter-spacing:0.04em; color:var(--ink);}
+  .logo span{color:var(--gold);}
+  .navlinks{display:flex; gap:28px; font-family:var(--mono); font-size:12px; letter-spacing:0.03em; color:var(--ink-dim);}
+  .navlinks a:hover{color:var(--violet);}
+  @media (max-width:720px){ .navlinks{display:none;} }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    position:relative;
+    padding:148px 0 90px;
+    overflow:hidden;
+  }
+  .peakline{position:absolute; left:0; right:0; bottom:0; width:100%; opacity:0.9;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:22px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px var(--gold);}
+  h1.title{
+    font-family:var(--serif); font-weight:600; font-size:clamp(38px,6vw,68px);
+    line-height:1.04; letter-spacing:-0.01em; max-width:780px; color:#fff;
+  }
+  h1.title em{font-style:italic; color:var(--violet); font-weight:500;}
+  .subtitle{
+    margin-top:26px; font-size:18px; color:var(--ink-dim); max-width:560px; font-weight:400;
+  }
+  .hero-meta{
+    margin-top:40px; display:flex; flex-wrap:wrap; gap:28px; font-family:var(--mono); font-size:12.5px; color:var(--ink-faint);
+  }
+  .hero-meta a{color:var(--ink-dim); border-bottom:1px solid transparent;}
+  .hero-meta a:hover{color:var(--violet); border-color:var(--violet);}
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:88px 0; border-top:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:18px; margin-bottom:48px;}
+  .peak-index{font-family:var(--mono); font-size:13px; color:var(--gold);}
+  h2.section-title{
+    font-family:var(--serif); font-size:clamp(26px,3.4vw,36px); font-weight:600; color:#fff; letter-spacing:-0.01em;
+  }
+
+  /* ---------- profile ---------- */
+  .profile-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px;}
+  @media (max-width:760px){ .profile-grid{grid-template-columns:1fr; gap:36px;} }
+  .profile-text p{font-size:16.5px; color:var(--ink-dim); margin-bottom:18px; max-width:560px;}
+  .profile-text strong{color:var(--ink); font-weight:600;}
+  .stat-card{background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; padding:22px 24px;}
+  .stat-list{display:flex; flex-direction:column; gap:0;}
+  .stat-row{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--line); font-size:14px;}
+  .stat-row:last-child{border-bottom:none;}
+  .stat-label{color:var(--ink-faint); font-family:var(--mono); font-size:12px; letter-spacing:0.02em;}
+  .stat-val{color:var(--ink); font-weight:500; text-align:right;}
+
+  /* ---------- timeline (peak-labeled) ---------- */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:46px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-peak{
+    position:absolute; left:-33px; top:2px; width:11px; height:11px;
+    background:var(--bg); border:2px solid var(--violet); border-radius:50%;
+  }
+  .tl-item.major .tl-peak{border-color:var(--gold); width:13px; height:13px; left:-34px; box-shadow:0 0 0 4px rgba(216,166,70,0.12);}
+  .tl-date{font-family:var(--mono); font-size:12px; color:var(--gold); margin-bottom:6px; letter-spacing:0.03em;}
+  .tl-title{font-family:var(--serif); font-size:20px; font-weight:600; color:#fff; margin-bottom:6px;}
+  .tl-org{font-size:13.5px; color:var(--ink-faint); margin-bottom:10px; font-style:italic;}
+  .tl-body{font-size:15px; color:var(--ink-dim); max-width:620px;}
+  .tl-body ul{margin-top:8px; padding-left:18px;}
+  .tl-body li{margin-bottom:6px;}
+
+  /* ---------- cards (community / leadership) ---------- */
+  .card-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  @media (max-width:760px){ .card-grid{grid-template-columns:1fr;} }
+  .card{
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; padding:26px 26px 24px;
+    transition:border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover{border-color:var(--violet-dim); transform:translateY(-2px);}
+  .card h3{font-family:var(--serif); font-size:18px; font-weight:600; color:#fff; margin-bottom:6px;}
+  .card .org{font-size:12.5px; color:var(--gold); font-family:var(--mono); margin-bottom:12px;}
+  .card p{font-size:14.5px; color:var(--ink-dim);}
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:30px;}
+  @media (max-width:760px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-group h4{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:14px;
+  }
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .pill{
+    font-family:var(--mono); font-size:12.5px; padding:6px 12px; border:1px solid var(--line); border-radius:3px; color:var(--ink-dim);
+  }
+
+  /* ---------- awards ---------- */
+  .award-row{display:flex; justify-content:space-between; align-items:baseline; padding:18px 0; border-bottom:1px solid var(--line); gap:20px;}
+  .award-row:last-child{border-bottom:none;}
+  .award-name{font-size:16px; color:var(--ink); font-weight:500;}
+  .award-meta{font-family:var(--mono); font-size:12px; color:var(--ink-faint); text-align:right; white-space:nowrap;}
+
+  /* ---------- references ---------- */
+  .ref-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+  @media (max-width:600px){ .ref-grid{grid-template-columns:1fr;} }
+  .ref-card{border:1px solid var(--line); border-radius:4px; padding:20px 22px;}
+  .ref-card .name{font-weight:600; color:#fff; margin-bottom:4px;}
+  .ref-card .role{font-size:13px; color:var(--ink-faint); margin-bottom:8px;}
+  .ref-card .mail{font-family:var(--mono); font-size:12.5px; color:var(--violet);}
+
+  /* ---------- footer ---------- */
+  footer{padding:64px 0 48px; border-top:1px solid var(--line);}
+  footer .wrap{display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px;}
+  footer .quote{font-family:var(--serif); font-style:italic; font-size:19px; color:var(--ink-dim); max-width:540px;}
+  footer .links{display:flex; gap:24px; font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-top:8px;}
+  footer .links a:hover{color:var(--violet);}
+  footer .copy{font-family:var(--mono); font-size:11px; color:var(--ink-faint); margin-top:18px;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  :focus-visible{outline:2px solid var(--violet); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">N. SIDDIQUE<span>·</span>FERRITES &amp; FIELDS</div>
+    <div class="navlinks">
+      <a href="#profile">Profile</a>
+      <a href="#research">Research</a>
+      <a href="#community">Community</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Bahawalnagar, Pakistan → Islamabad</div>
+    <h1 class="title">Synthesising the materials behind <em>Pakistan's</em> energy future.</h1>
+    <p class="subtitle">Nida Siddique — physics researcher specialising in spinel ferrites and magnetic materials, currently a Research Intern at the National Centre for Physics, Islamabad.</p>
+    <div class="hero-meta">
+      <a href="mailto:nidasiddique092@gmail.com">nidasiddique092@gmail.com</a>
+      <a href="tel:+923106127783">+92 310 6127783</a>
+      <a href="https://linkedin.com/in/nidasiddique02" target="_blank" rel="noopener">linkedin.com/in/nidasiddique02</a>
+    </div>
+  </div>
+
+  <svg class="peakline" viewBox="0 0 1080 130" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="peakFade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6C72E8" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#6C72E8" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,120 L40,118 L70,112 L100,119 L140,100 L160,60 L175,100 L210,116 L260,114 L290,80 L305,30 L320,80 L350,113 L400,111 L430,90 L448,45 L465,90 L500,115 L560,113 L590,95 L610,55 L628,95 L660,116 L720,112 L750,70 L768,20 L786,70 L820,114 L880,112 L905,98 L922,62 L940,98 L970,116 L1020,113 L1080,118 L1080,130 L0,130 Z"
+      fill="url(#peakFade)" stroke="#6C72E8" stroke-width="1.4" stroke-opacity="0.8"/>
+  </svg>
+</header>
+
+<section id="profile">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">001</span><h2 class="section-title">Profile</h2></div>
+    <div class="profile-grid">
+      <div class="profile-text">
+        <p>First-generation physics researcher from Bahawalnagar, specialising in <strong>solid-state physics, magnetic materials, and materials characterisation</strong>. An <strong>Ehsaas Scholar</strong> — recipient of the Government of Pakistan's fully funded merit scholarship — and ranked 3rd in her BSc (Hons) Physics cohort.</p>
+        <p>Currently a <strong>Research Intern at the National Centre for Physics (NCP)</strong>, Islamabad, Pakistan's premier advanced physics research institution. Combines rigorous experimental training with UX/UI design skills and a sustained, voluntary commitment to science education in underserved communities.</p>
+        <p>Seeking the <strong>Rhodes Scholarship</strong> to pursue graduate research in Materials Science at Oxford, with a long-term goal of contributing to Pakistan's energy and technology challenges.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-list">
+          <div class="stat-row"><span class="stat-label">DEGREE</span><span class="stat-val">BSc (Hons) Physics</span></div>
+          <div class="stat-row"><span class="stat-label">INSTITUTION</span><span class="stat-val">Islamia Univ. of Bahawalpur</span></div>
+          <div class="stat-row"><span class="stat-label">CGPA</span><span class="stat-val">3.75 / 4.00</span></div>
+          <div class="stat-row"><span class="stat-label">COHORT RANK</span><span class="stat-val">3rd Position</span></div>
+          <div class="stat-row"><span class="stat-label">FUNDING</span><span class="stat-val">Ehsaas Scholar (Full)</span></div>
+          <div class="stat-row"><span class="stat-label">FYP SCORE</span><span class="stat-val">88% — Team Lead</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">002</span><h2 class="section-title">Research Experience</h2></div>
+    <div class="timeline">
+
+      <div class="tl-item major">
+        <div class="tl-peak"></div>
+        <div class="tl-date">2026 — PRESENT</div>
+        <div class="tl-title">Research Intern</div>
+        <div class="tl-org">National Centre for Physics (NCP), Islamabad</div>
+        <div class="tl-body">
+          Competitive 3-month research internship at Pakistan's premier advanced physics research institution, focused on functional magnetic materials for sustainable energy applications.
+          <ul>
+            <li>Conducting post-graduate level experimental research under senior NCP researchers</li>
+            <li>Expanding expertise in advanced laboratory techniques beyond undergraduate study</li>
+            <li>Engaging with a national network of professional physicists and ongoing research programmes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item major">
+        <div class="tl-peak"></div>
+        <div class="tl-date">2022 — 2026</div>
+        <div class="tl-title">Final Year Research Project — Team Leader</div>
+        <div class="tl-org">"Formation of Spinel Ferrites (Li₂Fe₂₋ₓInₓO₄) by Sol-Gel Method" — Score: A (88%)</div>
+        <div class="tl-body">
+          Directed the full synthesis pipeline using the sol-gel method, leading a 4-person research team through sample preparation and materials characterisation.
+          <ul>
+            <li>Conducted XRD, FTIR, SEM, and Dielectric Spectroscopy analysis</li>
+            <li>Investigated AC conductivity and dielectric properties of synthesised ferrite materials</li>
+            <li>Produced original experimental data; co-authoring a research manuscript currently in preparation for journal submission</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-peak"></div>
+        <div class="tl-date">2022, 2024, 2025</div>
+        <div class="tl-title">Conference Participation — ICETP</div>
+        <div class="tl-org">International Conference on Emerging Trends in Physics, IUB</div>
+        <div class="tl-body">
+          Attended three consecutive ICETP conferences as volunteer and participant, engaging with faculty researchers and contributing to scientific community dialogue at the national level.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="community">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">003</span><h2 class="section-title">Community &amp; Leadership</h2></div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Science Tutor for Underprivileged Children</h3>
+        <div class="org">BAHAWALNAGAR · ONGOING</div>
+        <p>Voluntarily tutors children from low-income families in Physics, Mathematics, and English, designing accessible lesson plans for students with no prior access to quality science education. Motivated by personal experience of financial hardship.</p>
+      </div>
+      <div class="card">
+        <h3>Student Leader, BSc Physics Cohort</h3>
+        <div class="org">IUB · 2022–2026</div>
+        <p>Organised informal peer study sessions during periods of academic disruption without being asked, coordinating group research activities and supporting struggling classmates throughout the degree.</p>
+      </div>
+      <div class="card">
+        <h3>Conference Volunteer — ICETP</h3>
+        <div class="org">IUB · 2022, 2024, 2025</div>
+        <p>Supported the organisation and delivery of three consecutive international physics conferences, facilitating engagement between student attendees and senior researchers.</p>
+      </div>
+      <div class="card">
+        <h3>Further Achievements</h3>
+        <div class="org">SPEECH &amp; LITERARY COMPETITION</div>
+        <p>2nd Position, English Speech Competition (Dec 2024) · 3rd Position, Sirat-e-Nabi Contest (Sep 2023).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="professional">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">004</span><h2 class="section-title">Professional Experience</h2></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-peak"></div>
+        <div class="tl-date">JUNE 2024 — JUNE 2026</div>
+        <div class="tl-title">Physics, Mathematics &amp; English Tutor</div>
+        <div class="tl-org">Private Tutoring, Bahawalnagar</div>
+        <div class="tl-body">Designed differentiated lesson plans for students at varying levels across underserved areas, adapting methods to individual learning needs and developing strategies to improve long-term student self-sufficiency.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-peak"></div>
+        <div class="tl-date">2024 — 2025</div>
+        <div class="tl-title">UX/UI Designer — Google Certified</div>
+        <div class="tl-org">Independent</div>
+        <div class="tl-body">Designed user-centred interfaces applying UX research, design thinking, and iterative prototyping in Figma. Applied human-centred design principles to scientific communication — bridging complex research and accessible presentation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">005</span><h2 class="section-title">Awards &amp; Scholarships</h2></div>
+    <div class="award-row">
+      <span class="award-name">Ehsaas Programme Scholarship (Fully Funded)</span>
+      <span class="award-meta">Govt. of Pakistan · 2022–2026</span>
+    </div>
+    <div class="award-row">
+      <span class="award-name">3rd Position, BSc (Hons) Physics Cohort</span>
+      <span class="award-meta">IUB · CGPA 3.75/4.00</span>
+    </div>
+    <div class="award-row">
+      <span class="award-name">Final Year Project Excellence — 88%, Team Leader</span>
+      <span class="award-meta">"Spinel Ferrites by Sol-Gel Method"</span>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">006</span><h2 class="section-title">Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Research &amp; Laboratory</h4>
+        <div class="pill-row">
+          <span class="pill">XRD</span><span class="pill">FTIR</span><span class="pill">SEM</span>
+          <span class="pill">Dielectric Spectroscopy</span><span class="pill">Sol-Gel Synthesis</span>
+          <span class="pill">Data Analysis</span><span class="pill">Experimental Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Design &amp; Digital</h4>
+        <div class="pill-row">
+          <span class="pill">Figma</span><span class="pill">Wireframing</span><span class="pill">Prototyping</span>
+          <span class="pill">Usability Testing</span><span class="pill">UX Research</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Languages &amp; Office</h4>
+        <div class="pill-row">
+          <span class="pill">Urdu — Native</span><span class="pill">English — Professional</span>
+          <span class="pill">Word</span><span class="pill">Excel</span><span class="pill">PowerPoint</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="references">
+  <div class="wrap">
+    <div class="section-head"><span class="peak-index">007</span><h2 class="section-title">References</h2></div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="name">Dr. Nasir Rasool</div>
+        <div class="role">Head of Department, IUB</div>
+        <div class="mail">nasir.rasool@iub.edu.pk</div>
+      </div>
+      <div class="ref-card">
+        <div class="name">Dr. Abdul Majeed Khan</div>
+        <div class="role">Research Supervisor, IUB</div>
+        <div class="mail">Abdulmajeed@iub.edu.pk</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="quote">"Education taught me otherwise. Science gave me purpose. Service gave that purpose meaning."</div>
+    <div class="links">
+      <a href="mailto:nidasiddique092@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/nidasiddique02" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="tel:+923106127783">Phone</a>
+    </div>
+    <div class="copy">NIDA SIDDIQUE · BAHAWALNAGAR, PAKISTAN · UPDATED 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
